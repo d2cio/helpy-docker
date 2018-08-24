@@ -7,18 +7,25 @@ default: &default
 
 development:
   <<: *default
-  database: helpy_development
-  port: 5432
-  host: localhost
+  host: <%= ENV['POSTGRES_HOST'] %>
+  port: <%= ENV['POSTGRES_PORT'] || 5432 %>
+  database: <%= ENV['POSTGRES_DB'] || 'helpy' %>
+  username: <%= ENV['POSTGRES_USER'] || 'helpy' %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
 
 test:
   <<: *default
-  database: helpy_test
+  host: <%= ENV['POSTGRES_HOST'] %>
+  port: <%= ENV['POSTGRES_PORT'] || 5432 %>
+  database: <%= ENV['POSTGRES_DB'] || 'helpy' %>
+  username: <%= ENV['POSTGRES_USER'] || 'helpy' %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
 
 
 production:
   <<: *default
   host: <%= ENV['POSTGRES_HOST'] %>
-  database: <%= ENV['POSTGRES_DB'] %>
-  username: <%= ENV['POSTGRES_USER'] %>
+  port: <%= ENV['POSTGRES_PORT'] || 5432 %>
+  database: <%= ENV['POSTGRES_DB'] || 'helpy' %>
+  username: <%= ENV['POSTGRES_USER'] || 'helpy' %>
   password: <%= ENV['POSTGRES_PASSWORD'] %>
